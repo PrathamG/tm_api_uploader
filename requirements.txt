@@ -73,7 +73,6 @@ Markdown
 MarkupSafe==1.1.1
 matplotlib
 mccabe==0.6.1
-mediapipe==0.8.2
 mistune==0.8.4
 mkl-fft==1.2.0
 mkl-random==1.1.0
