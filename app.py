@@ -136,6 +136,7 @@ def predict():
 
     # run the inference
     prediction = model.predict(data)[0]
+    prediction = list(map(str, prediction))
     pred_dict = dict(zip(labels_list, prediction))
 
     response = app.response_class(
