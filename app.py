@@ -139,7 +139,7 @@ def predict():
 
     pred_dict = dict(zip(labels_list, prediction))
 
-    return json.dumps(pred_dict)
+    return pred_dict, 200
 
 @app.route('/b64',methods = ['POST', 'GET'])
 def image_to_b64():
