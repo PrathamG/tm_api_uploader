@@ -136,10 +136,14 @@ def predict():
 
     # run the inference
     prediction = model.predict(data)[0]
-
     pred_dict = dict(zip(labels_list, prediction))
 
-    return pred_dict, 200
+    response = app.response_class(
+        response=json.dumps(pred_dict),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route('/b64',methods = ['POST', 'GET'])
 def image_to_b64():
