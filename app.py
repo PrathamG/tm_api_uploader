@@ -137,11 +137,9 @@ def predict():
     # run the inference
     prediction = model.predict(data)[0]
 
-    output_text = ""
-    for idx, prediction in enumerate(prediction):
-        output_text += (labels_list[idx] + " " + str(prediction) + "<br>")
-    
-    return output_text
+    pred_dict = dict(zip(labels_list, prediction))
+
+    return json.dumps(pred_dict)
 
 @app.route('/b64',methods = ['POST', 'GET'])
 def image_to_b64():
