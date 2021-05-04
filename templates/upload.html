@@ -1,9 +1,14 @@
 <html>
    <body>
-      <form action = "http://localhost:5000/uploader" method = "POST" 
+      <form action = "/upload" method = "POST" 
          enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
+         <label for="myfile">Select .h5 file:</label> <br>
+         <input type = "file" name = "model" />
+         <br><br>
+         <label for="myfile">Select labels.txt file:</label> <br>
+         <input type = "file" name = "labels" />
+         <br><br>
+         <input type = "submit" />
       </form>   
    </body>
 </html>
