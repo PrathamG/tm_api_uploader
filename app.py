@@ -90,25 +90,26 @@ def upload():
 
         return "Label ID: " + label_file_id + "<br>" + "Model ID: " + model_file_id + "<br><br> Please keep a copy of these IDs. They will be required to use the API"
 
-@app.route('/predict',methods = ['POST', 'GET'])
+@app.route('/predict',methods = ['POST'])
 def predict():
     auth_resp = get_auth_resp(key)
+    params = request.json
+    img_b64 = params['img']
+    model_id = params['model']
+    label_id = params['label']
 
-    img_b64 = request.args.get('img')
     img_b64 = parse.unquote(img_b64, encoding='ascii', errors='replace')
     
     download_url = auth_resp['apiUrl']
     auth_token = auth_resp['authorizationToken']
     headers = {'Authorization': auth_token}
     
-    model_id = request.args.get('model') 
     model_url = download_url + '/b2api/v2/b2_download_file_by_id?fileId=' + model_id
     model_resp = requests.get(url = model_url, headers = headers)
     model_bytes = io.BytesIO(model_resp.content)
     model_file = h5py.File(model_bytes,'r')
     model = tensorflow.keras.models.load_model(model_file, compile = False)
 
-    label_id = request.args.get('label') 
     label_url = download_url + '/b2api/v2/b2_download_file_by_id?fileId=' + label_id
     label_resp = requests.get(url = label_url, headers = headers)
     labels = label_resp.text
